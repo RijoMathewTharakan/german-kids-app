@@ -58,44 +58,49 @@ export default function StudentMap({ activeGrade, completedLessons, onStartLesso
               {/* Node Card Popup when clicked */}
               {selectedNode && selectedNode.id === lesson.id && (
                 <div 
-                  className="node-label-card"
+                  className="node-label-card expanded"
                   style={{
-                    transform: `translateX(${horizontalOffset}) translateY(10px)`,
+                    transform: `translateX(${horizontalOffset})`,
                     borderColor: activeGrade.theme.primary,
                     borderWidth: '2px',
-                    position: 'absolute',
-                    top: '85px',
+                    width: '320px',
+                    maxWidth: '90vw',
+                    position: 'relative',
                     zIndex: 20
                   }}
                 >
-                  <h4 className="font-playful">{lesson.title}</h4>
+                  <h4 className="font-playful" style={{ cursor: 'pointer' }} onClick={() => handleNodeClick(lesson, idx, isLocked)}>
+                    {lesson.title}
+                  </h4>
                   <p style={{ margin: '0.5rem 0' }}>{lesson.description}</p>
                   <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', marginTop: '0.75rem' }}>
                     <button
                       className="action-btn"
                       style={{
-                        padding: '0.5rem 1rem',
-                        fontSize: '0.95rem',
-                        minHeight: '40px',
+                        padding: '0.5rem 0.75rem',
+                        fontSize: '0.9rem',
+                        minHeight: '45px',
                         background: activeGrade.theme.primary,
-                        color: '#fff'
+                        color: '#fff',
+                        flex: 1
                       }}
                       onClick={() => {
                         onStartLesson(lesson, 'learn');
                         setSelectedNode(null);
                       }}
                     >
-                      📖 Learn Vocab
+                      📖 Learn
                     </button>
                     {isCompleted && (
                       <button
                         className="action-btn"
                         style={{
-                          padding: '0.5rem 1rem',
-                          fontSize: '0.95rem',
-                          minHeight: '40px',
+                          padding: '0.5rem 0.75rem',
+                          fontSize: '0.9rem',
+                          minHeight: '45px',
                           background: '#fff',
-                          color: '#0f172a'
+                          color: '#0f172a',
+                          flex: 1
                         }}
                         onClick={() => {
                           onStartLesson(lesson, 'games');
@@ -108,18 +113,19 @@ export default function StudentMap({ activeGrade, completedLessons, onStartLesso
                     <button
                       className="action-btn"
                       style={{
-                        padding: '0.5rem 1rem',
-                        fontSize: '0.95rem',
-                        minHeight: '40px',
+                        padding: '0.5rem 0.75rem',
+                        fontSize: '0.9rem',
+                        minHeight: '45px',
                         background: activeGrade.theme.accent || '#ffd066',
-                        color: '#0f172a'
+                        color: '#0f172a',
+                        flex: 1
                       }}
                       onClick={() => {
                         onStartLesson(lesson, 'quiz');
                         setSelectedNode(null);
                       }}
                     >
-                      📝 Take Quiz
+                      📝 Quiz
                     </button>
                   </div>
                 </div>
@@ -131,8 +137,9 @@ export default function StudentMap({ activeGrade, completedLessons, onStartLesso
                   className="node-label-card" 
                   style={{ 
                     transform: `translateX(${isLocked ? '0px' : horizontalOffset})`,
-                    pointerEvents: 'none'
+                    cursor: isLocked ? 'not-allowed' : 'pointer'
                   }}
+                  onClick={() => handleNodeClick(lesson, idx, isLocked)}
                 >
                   <h4>{lesson.title.split(' - ')[0]}</h4>
                   <p>{isCompleted ? '✅ Finished (+50 XP)' : isLocked ? 'Locked' : '🌟 Start Learning'}</p>

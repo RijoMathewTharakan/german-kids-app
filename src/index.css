@@ -284,13 +284,23 @@ h1, h2, h3, h4, .font-playful {
 
 .node-label-card {
   margin-top: 1rem;
-  background: var(--bg-card);
-  border: 1px solid var(--bg-card-border);
-  padding: 0.75rem 1.5rem;
+  background: #1e293b; /* Solid background to prevent connection line overlapping text visually */
+  border: 2px solid var(--bg-card-border);
+  padding: 0.85rem 1.5rem;
   border-radius: var(--border-radius-md);
   text-align: center;
   max-width: 250px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  transition: var(--transition-smooth);
+  pointer-events: auto;
+}
+
+.node-label-card:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.node-label-card.expanded {
+  max-width: 320px;
 }
 
 .node-label-card h4 {
