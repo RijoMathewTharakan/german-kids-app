@@ -108,13 +108,13 @@ export default function App() {
   };
 
   const handlePinSubmit = () => {
-    // Teacher PIN is either "1234" or "mesadmin"
-    if (pinInput === '1234' || pinInput === 'mesadmin') {
+    // Teacher Password
+    if (pinInput === '#Rjteach_app_auth_2026') {
       setIsAdminUnlocked(true);
       setShowPinModal(false);
       setCurrentView('admin');
     } else {
-      setPinError('Incorrect password/PIN! Try "mesadmin" or "1234".');
+      setPinError('Incorrect password! Please try again.');
       setPinInput('');
     }
   };
@@ -254,7 +254,7 @@ export default function App() {
             <input 
               type="password" 
               className="input-field" 
-              placeholder="e.g. mesadmin"
+              placeholder="Enter password"
               value={pinInput}
               onChange={(e) => setPinInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handlePinSubmit()}
@@ -276,9 +276,6 @@ export default function App() {
               >
                 Login
               </button>
-            </div>
-            <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.25)' }}>
-              (Default login: <strong>mesadmin</strong>)
             </div>
           </div>
         </div>
